@@ -22,27 +22,34 @@ number_mapping = {
     171: 171, 172: 172, 173: 173, 174: 174, 175: 175, 176: 176, 177: 177, 178: 178, 179: 179, 180: 180,
     181: 181, 182: 182, 183: 183, 184: 184, 185: 185, 186: 186, 187: 187, 188: 188, 189: 189, 190: 190,
     191: 191, 192: 192, 193: 193, 194: 194, 195: 195, 196: 196, 197: 197, 198: 198, 199: 199, 200: 200,
-    201: 201, 202.1: 202, 202.2: 203, 203: 204, 204: 205, 205: 206, 206: 207, 207: 208, 208: 209, 209: 210,
-    210: 211, 211.1: 212, 211.2: 213, 212: 214, 213: 215, 214: 216, 215: 217, 216: 218, 217: 219, 218: 220,
+    201: 201, 202: "202 and 203", 202.1: 202, 202.2: 203, 203: 204, 204: 205, 205: 206, 206: 207, 207: 208, 208: 209, 209: 210,
+    210: 211, 211: "212 and 213", 211.1: 212, 211.2: 213, 212: 214, 213: 215, 214: 216, 215: 217, 216: 218, 217: 219, 218: 220,
     219: 221, 220: 222, 221: 223, 222: 224, 223: 225, 224: 226, 225: 227, 226: 228, 227: 229, 228: 230,
-    229: 231, 230: 232, 231: 233, 232: 234, 233: 235, 234.1: 236, 234.2: 237, 235: 238, 236: 239, 237: 240,
+    229: 231, 230: 232, 231: 233, 232: 234, 233: 235, 234: "236 and 237", 234.1: 236, 234.2: 237, 235: 238, 236: 239, 237: 240,
     238: 241, 239: 242, 240: 243, 241: 244, 242: 245, 243: 246, 244: 247, 245: 248, 246: 249, 247: 250,
     248: 251, 249: 252, 250: 253, 251: 254, 252: 255, 253: 256, 254: 257, 255: 258, 256: 259, 257: 260,
-    258: 261, 259: 262, 260: 263, 261.1: 264, 261.2: 265, 262: 266, 263: 267, 264: 268, 265: 269, 266: 270,
-    267: 271, 268: 272, 269: 273, 270: 274, 271.1: 275, 271.2: 276, 272: 277, 273: 278, 274: 279, 275: 280,
-    276: 281, 277: 282, 278: 283, 279: 284, 280: 285, 281: 286, 282.1: 287, 282.2: 288, 283: 289, 284: 290,
+    258: 261, 259: 262, 260: 263, 261: "264 and 265", 261.1: 264, 261.2: 265, 262: 266, 263: 267, 264: 268, 265: 269, 266: 270,
+    267: 271, 268: 272, 269: 273, 270: 274, 271: "275 and 276", 271.1: 275, 271.2: 276, 272: 277, 273: 278, 274: 279, 275: 280,
+    276: 281, 277: 282, 278: 283, 279: 284, 280: 285, 281: 286, 282: "287 and 288", 282.1: 287, 282.2: 288, 283: 289, 284: 290,
     285: 291, 286: 292, 287: 293, 288: 294, 289: 295, 290: 296, 291: 297, 292: 298, 293: 299, 294: 300,
     295: 301, 296: 302, 297: 303, 298: 304, 299: 305, 300: 306, 301: 307, 302: 308, 303: 309
 }
 
-st.title('This simple app can you help figure out which chapter you are at!')
-st.write('We are really sorry for any inconvenience caused when we changed the numbering system. Appreciate you guys! Happy reading!')
+st.title('This simple app can help you figure out which chapter you are at!')
+st.write("""We are really sorry for any inconvenience caused when we changed the numbering system.
+We want to make sure that everyone reading the novel we translate gets well taken care of! Happy reading!""")
 
 # User input
 user_input = st.number_input('Enter a number:', min_value=1.0, max_value=303.0, step=0.1)
 
-# Get the corresponding number
-if user_input in number_mapping:
-    st.write(f'The corresponding number is: {number_mapping[user_input]}')
+# Round the input number to the nearest integer if necessary
+if user_input.is_integer():
+    formatted_input = int(user_input)
 else:
-    st.write('Number not found in the mapping.')
+    formatted_input = float(user_input)
+
+# Get the corresponding number
+if formatted_input in number_mapping:
+    st.write(f'The corresponding number is: {number_mapping[formatted_input]}')
+else:
+    st.write('Number not found!')
